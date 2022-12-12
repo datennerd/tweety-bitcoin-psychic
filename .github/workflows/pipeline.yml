@@ -9,10 +9,10 @@ jobs:
     name: KerasTuner
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-      - uses: actions/setup-python@main
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          python-version: "3.8.0"
+          python-version: "3.8.15"
       - run: pip install -r requirements.txt
       - name: Create artifact folder
         run: |
@@ -32,10 +32,10 @@ jobs:
     name: Train new model
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-      - uses: actions/setup-python@main
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          python-version: "3.8.0"
+          python-version: "3.8.15"
       - run: pip install -r requirements.txt
       - name: Download artifacts
         uses: actions/download-artifact@main
@@ -56,10 +56,10 @@ jobs:
     name: Retrain & compare old model
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-      - uses: actions/setup-python@main
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          python-version: "3.8.0"
+          python-version: "3.8.15"
       - run: pip install -r requirements.txt
       - name: Download last workflow artifacts
         continue-on-error: true
@@ -86,10 +86,10 @@ jobs:
     name: Train best model
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-      - uses: actions/setup-python@main
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          python-version: "3.8.0"
+          python-version: "3.8.15"
       - run: pip install -r requirements.txt
       - name: Download last workflow artifacts
         continue-on-error: true
@@ -112,7 +112,7 @@ jobs:
           retention-days: 10
 
   twitter:
-    if: ${{ github.event_name == 'schedule' }}
+    # if: ${{ github.event_name == 'schedule' }}
     needs: [kerastuner, train, compare, forecast]
     name: Tweet forecast
     runs-on: ubuntu-latest
@@ -122,10 +122,10 @@ jobs:
       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
       ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
     steps:
-      - uses: actions/checkout@main
-      - uses: actions/setup-python@main
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
         with:
-          python-version: "3.8.0"
+          python-version: "3.8.15"
       - run: pip install -r requirements.txt
       - name: Download artifacts
         uses: actions/download-artifact@main
