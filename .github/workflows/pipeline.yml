@@ -111,27 +111,27 @@ jobs:
           path: data
           retention-days: 10
 
-  twitter:
-    # if: ${{ github.event_name == 'schedule' }}
-    needs: [kerastuner, train, compare, forecast]
-    name: Tweet forecast
-    runs-on: ubuntu-latest
-    env:
-      API_KEY: ${{ secrets.API_KEY }}
-      API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
-      ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-      ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.8.15"
-      - run: pip install -r requirements.txt
-      - name: Download artifacts
-        uses: actions/download-artifact@main
-        with:
-          name: assets
-          path: data
-      - name: Tweet forecast
-        run: python tweety_bitcoin_psychic/pipe_twitter.py
+  # twitter:
+  #   if: ${{ github.event_name == 'schedule' }}
+  #   needs: [kerastuner, train, compare, forecast]
+  #   name: Tweet forecast
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     API_KEY: ${{ secrets.API_KEY }}
+  #     API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
+  #     ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  #     ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-python@v4
+  #       with:
+  #         python-version: "3.8.15"
+  #     - run: pip install -r requirements.txt
+  #     - name: Download artifacts
+  #       uses: actions/download-artifact@main
+  #       with:
+  #         name: assets
+  #         path: data
+  #     - name: Tweet forecast
+  #       run: python tweety_bitcoin_psychic/pipe_twitter.py
         
