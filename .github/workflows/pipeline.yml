@@ -21,7 +21,7 @@ jobs:
       - name: KerasTuner
         run: python tweety_bitcoin_psychic/pipe_kerastuner.py
       - name: Upload artifacts
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v3
         with:
           name: assets
           path: data
@@ -38,14 +38,14 @@ jobs:
           python-version: "3.8.15"
       - run: pip install -r requirements.txt
       - name: Download artifacts
-        uses: actions/download-artifact@main
+        uses: actions/download-artifact@v3
         with:
           name: assets
           path: data
       - name: Train new model
         run: python tweety_bitcoin_psychic/pipe_train.py
       - name: Upload artifacts
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v3
         with:
           name: assets
           path: data
@@ -68,14 +68,14 @@ jobs:
           workflow: pipeline.yml
           workflow_conclusion: success
       - name: Download last job artifacts
-        uses: actions/download-artifact@main
+        uses: actions/download-artifact@v3
         with:
           name: assets
           path: data
       - name: Retrain & compare old model
         run: python tweety_bitcoin_psychic/pipe_compare.py
       - name: Upload artifacts
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v3
         with:
           name: assets
           path: data
@@ -98,14 +98,14 @@ jobs:
           workflow: pipeline.yml
           workflow_conclusion: success
       - name: Download last job artifacts
-        uses: actions/download-artifact@main
+        uses: actions/download-artifact@v3
         with:
           name: assets
           path: data
       - name: Train best model
         run: python tweety_bitcoin_psychic/pipe_forecast.py
       - name: Upload artifacts
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v3
         with:
           name: assets
           path: data
@@ -128,7 +128,7 @@ jobs:
   #         python-version: "3.8.15"
   #     - run: pip install -r requirements.txt
   #     - name: Download artifacts
-  #       uses: actions/download-artifact@main
+  #       uses: actions/download-artifact@v3
   #       with:
   #         name: assets
   #         path: data
